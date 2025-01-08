@@ -84,6 +84,7 @@ class TestUserRole(TransactionCase):
 
     def test_role_1(self):
         self.user_id.write({"role_line_ids": [(0, 0, {"role_id": self.role1_id.id})]})
+        self.user_id.set_groups_from_roles(force=True)
         user_group_ids = sorted({group.id for group in self.user_id.groups_id})
         role_group_ids = self.role1_id.trans_implied_ids.ids
         role_group_ids.append(self.role1_id.group_id.id)
@@ -92,6 +93,7 @@ class TestUserRole(TransactionCase):
 
     def test_role_2(self):
         self.user_id.write({"role_line_ids": [(0, 0, {"role_id": self.role2_id.id})]})
+        self.user_id.set_groups_from_roles(force=True)
         user_group_ids = sorted({group.id for group in self.user_id.groups_id})
         role_group_ids = self.role2_id.trans_implied_ids.ids
         role_group_ids.append(self.role2_id.group_id.id)
@@ -107,6 +109,7 @@ class TestUserRole(TransactionCase):
                 ]
             }
         )
+        self.user_id.set_groups_from_roles(force=True)
         user_group_ids = sorted({group.id for group in self.user_id.groups_id})
         role1_group_ids = self.role1_id.trans_implied_ids.ids
         role1_group_ids.append(self.role1_id.group_id.id)
@@ -130,6 +133,7 @@ class TestUserRole(TransactionCase):
                 ]
             }
         )
+        self.user_id.set_groups_from_roles(force=True)
         user_group_ids = sorted({group.id for group in self.user_id.groups_id})
         role1_group_ids = self.role1_id.trans_implied_ids.ids
         role1_group_ids.append(self.role1_id.group_id.id)
@@ -150,6 +154,7 @@ class TestUserRole(TransactionCase):
                 ]
             }
         )
+        self.user_id.set_groups_from_roles(force=True)
         # Check user has groups from role1 and role2
         self.assertLessEqual(role1_groups, self.user_id.groups_id)
         self.assertLessEqual(role2_groups, self.user_id.groups_id)
@@ -178,6 +183,7 @@ class TestUserRole(TransactionCase):
                 ]
             }
         )
+        self.user_id.set_groups_from_roles(force=True)
         # Check user has groups from role1 and role2
         self.assertLessEqual(role1_groups, self.user_id.groups_id)
         self.assertLessEqual(role2_groups, self.user_id.groups_id)
